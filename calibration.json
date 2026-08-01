@@ -1,0 +1,36 @@
+{
+  "panel_open": true,
+  "raw": {
+    "bubble": {
+      "selector": ".daily-checkin.daily-checkin--bubble",
+      "coord": [130, 548],
+      "bbox": [12, 436, 236, 224]
+    },
+    "claim": {
+      "selector": ".fuel-actions > .fuel-btn",
+      "coord": [75, 636],
+      "bbox": [24, 621, 101, 29]
+    },
+    "close": {
+      "selector": ".fuel-close",
+      "coord": [230, 454],
+      "bbox": [222, 446, 16, 16]
+    },
+    "expanded": {
+      "selector": ".fuel-card.fuel-expanded",
+      "bbox": [12, 436, 236, 224]
+    },
+    "compact": {
+      "selector": ".fuel-card.fuel-compact",
+      "bbox": [0, 0, 0, 0]
+    }
+  },
+  "reuse": {
+    "bubble": [130, 548],
+    "claim": [75, 636],
+    "close": [230, 454],
+    "user_menu": [94, 694],
+    "station": [172, 262]
+  },
+  "note": "2026-07-25 由 CDP Shadow DOM 遍历抓取，WorkBuddy v5.3.3，屏幕 1280x768。面板位于左侧 daily-checkin 气泡内，内容在 wb-slot--avatar-top 的 Shadow DOM 中。"
+}
