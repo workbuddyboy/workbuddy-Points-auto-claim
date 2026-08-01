@@ -28,6 +28,16 @@ WorkBuddy 桌面客户端基于 Electron（Chromium）。启动时若带上 `--r
 
 ---
 
+## 演示截图
+
+下图是 CDP 截图得到的 WorkBuddy 签到面板。脚本点击「Buddy 加油站」后，左侧会出现该面板；领取成功后，按钮文本会从「立即领取」变为「今日已领」。
+
+![签到面板](assets/demo-checkin.png)
+
+> 该截图仅展示签到面板本身，已裁剪掉用户名、聊天区等隐私信息。
+
+---
+
 ## 环境要求
 
 | 项目 | 说明 |
@@ -95,6 +105,40 @@ venv\Scripts\python claim_cdp.py
 | `register_task.ps1` | 注册 Windows 计划任务（每日 07:10） |
 | `calibration.json` | 坐标参考快照（特定分辨率/版本下的面板坐标，**脚本运行并不读取此文件**，仅供理解与重新校准时参考） |
 | `requirements.txt` | Python 依赖（仅需 `playwright`） |
+| `sync_repo.py` | 本地同步脚本：把开发目录的最新改动一键推送到 GitHub |
+| `screenshot_demo.py` | 演示截图脚本：截取签到面板生成 README 用图 |
+| `upload_via_api.py` | 辅助上传脚本：当 `git push` 不可用时，通过 GitHub Contents API 上传文件 |
+| `.github/workflows/ci.yml` | GitHub Actions 工作流：每次 push/PR 自动做语法与结构检查 |
+
+---
+
+## 自动化工作流与脚本同步
+
+### GitHub Actions CI
+
+仓库已配置 `.github/workflows/ci.yml`。每次 `push` 到 `main` 或提交 `pull_request` 时，会自动执行：
+
+- 对 `claim_cdp.py` 做 Python 语法检查 (`python -m py_compile`)
+- 校验 `calibration.json` 格式
+- 检查核心文件是否齐全
+
+这样即便他人在浏览器里直接编辑了文件，也能第一时间发现拼写/语法错误。
+
+### 本地脚本同步
+
+`sync_repo.py` 用于把本机开发目录（默认 `../claim_points`）的最新脚本同步到这个开源仓库，并自动 `git commit && git push`。
+
+```bash
+# 默认同步 ../claim_points 到本仓库并推送
+python sync_repo.py
+```
+
+如果你的开发目录不在 `../claim_points`，可覆盖：
+
+```bash
+set SRC_DIR=C:\path\to\claim_points
+python sync_repo.py
+```
 
 ---
 
