@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Python syntax check
+        run: |
+          python -m py_compile claim_cdp.py && echo "claim_cdp.py compiled OK"
+
+      - name: Validate calibration.json
+        run: |
+          python -c "import json; json.load(open('calibration.json')); print('calibration.json valid')"
+
+      - name: Check required files
+        run: |
+          for f in claim_cdp.py run.bat start_workbuddy_debug.bat register_task.ps1 requirements.txt README.md LICENSE .gitignore; do
+            test -f "$f" && echo "present: $f" || (echo "MISSING: $f" && exit 1)
+          done
