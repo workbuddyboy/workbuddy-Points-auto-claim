@@ -15,6 +15,8 @@ last_claim_date.txt
 *.jpeg
 *.html
 *.gif
+# 仓库内 README 演示图例外
+!assets/demo-checkin.png
 
 # --- Python 缓存 ---
 __pycache__/
