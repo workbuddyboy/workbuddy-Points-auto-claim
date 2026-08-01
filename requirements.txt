@@ -1,0 +1,2 @@
+# 主脚本 claim_cdp.py 仅依赖 playwright（connect_over_cdp 连已运行的 WorkBuddy Chromium，无需额外下载浏览器）
+playwright>=1.40.0
